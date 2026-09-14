@@ -1,7 +1,5 @@
 package com.viagens.rotaunica.model;
 
-import com.viagens.rotaunica.enums.UserRole;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

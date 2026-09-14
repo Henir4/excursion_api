@@ -2,8 +2,6 @@ package com.viagens.rotaunica.model;
 
 import java.time.LocalDateTime;
 
-import com.viagens.rotaunica.enums.BookingStatus;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

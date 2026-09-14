@@ -1,3 +1,3 @@
-package com.viagens.rotaunica.enums;
+package com.viagens.rotaunica.model;
 
 public enum BookingStatus { PENDING, CONFIRMED, CANCELLED }
