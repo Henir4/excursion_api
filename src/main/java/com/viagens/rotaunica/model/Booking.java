@@ -2,8 +2,12 @@ package com.viagens.rotaunica.model;
 
 import java.time.LocalDateTime;
 
+import com.viagens.rotaunica.enums.BookingStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,6 +40,9 @@ public class Booking {
 	
 	@Column(nullable = false)
 	private Integer participants;
+	
+	@Enumerated(EnumType.STRING)
+	private BookingStatus status = BookingStatus.PENDING;
 	
 	@Column(nullable = false)
 	private LocalDateTime createdAt = LocalDateTime.now();
