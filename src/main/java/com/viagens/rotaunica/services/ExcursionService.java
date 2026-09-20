@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.viagens.rotaunica.dto.ExcursionRequest;
 import com.viagens.rotaunica.dto.ExcursionResponse;
 import com.viagens.rotaunica.model.Excursion;
+import com.viagens.rotaunica.model.User;
 import com.viagens.rotaunica.repositories.ExcursionRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -33,14 +34,13 @@ public class ExcursionService {
 	}
 	
 	public List<ExcursionResponse> search (String location, BigDecimal minPrice, BigDecimal maxPrice) {
-		List<Excursion> results;
+		List<Excursion> results = null;
 		if (location != null) {
 			results = excursionRepository.findByLocationContainingIgnoreCase(location);
 		} else if (minPrice != null && maxPrice !=null)  {
 			results = excursionRepository.findByPriceBetween(minPrice, maxPrice);
-		} else {
-			return results.stream().map(this::toResponse).toList();
 		}
+		return results.stream().map(this::toResponse).toList();
 	}
 	
 	@Transactional
@@ -50,7 +50,7 @@ public class ExcursionService {
     e.setDescription(req.description());
     e.setLocation(req.location());
     e.setPrice(req.price());
-    e.setDurationMinutes(req.durationMinutes());
+    e.setDuration(req.duration());
     e.setMaxParticipants(req.maxParticipants());
     e.setGuide(guide);
     return toResponse(excursionRepository.save(e));
@@ -59,8 +59,7 @@ public class ExcursionService {
 	private ExcursionResponse toResponse(Excursion e) {
     return new ExcursionResponse(
         e.getId(), e.getTitle(), e.getDescription(), e.getLocation(),
-        e.getPrice(), e.getDuration(), e.getMaxParticipants(),
-        e.getGuide() != null ? e.getGuide().getFullName() : null
+				e.getPrice(), e.getDuration(), e.getMaxParticipants(), e.getGuide().getNickname()
     );
 }
 

@@ -10,7 +10,6 @@ import com.viagens.rotaunica.model.User;
 import com.viagens.rotaunica.repositories.BookingRepository;
 import com.viagens.rotaunica.repositories.ExcursionRepository;
 
-import ch.qos.logback.core.joran.conditional.IfAction;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
