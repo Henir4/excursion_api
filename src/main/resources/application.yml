@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: rotaunica
+  profiles:
+    active: dev
+  jackson:
+    default-property-inclusion: non_null
+  web:
+    error:
+      include-binding-errors: always
+      include-message: always
+
+server:
+  port: 8080
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    '[com.viagens.rotaunica]': DEBUG
