@@ -34,7 +34,7 @@ public class ExcursionService {
 	}
 	
 	public List<ExcursionResponse> search (String location, BigDecimal minPrice, BigDecimal maxPrice) {
-		List<Excursion> results = null;
+		List<Excursion> results = List.of();
 		if (location != null) {
 			results = excursionRepository.findByLocationContainingIgnoreCase(location);
 		} else if (minPrice != null && maxPrice !=null)  {
