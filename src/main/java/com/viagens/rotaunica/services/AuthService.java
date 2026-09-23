@@ -2,6 +2,7 @@ package com.viagens.rotaunica.services;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -48,7 +49,7 @@ public class AuthService {
     );
 
     User user = userRepository.findByEmail(req.email())
-      .orElseThrow(() -> new IllegalStateException("User not found"));
+      .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
     return new AuthResponse(jwtService.generateToken(user), user.getEmail(), user.getRole().name());
   }
