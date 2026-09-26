@@ -49,7 +49,7 @@ public class AuthService {
     );
 
     User user = userRepository.findByEmail(req.email())
-      .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+      .orElseThrow(() -> new UsernameNotFoundException ("User not found"));
 
     return new AuthResponse(jwtService.generateToken(user), user.getEmail(), user.getRole().name());
   }
