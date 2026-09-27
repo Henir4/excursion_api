@@ -35,31 +35,32 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
   private final JwtAuthFilter jwtAuthFilter;
-  private final UserRepository userRepository;
 
-  public UserDetailsService userDetailsService() {
+  @Bean
+  static UserDetailsService userDetailsService(UserRepository userRepository) {
     return email -> userRepository.findByEmail(email)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 
   @Bean 
-  public PasswordEncoder passwordEncoder() {
+  PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
   @Bean 
-  public AuthenticationProvider authenticationProvider() {
-    var provider = new DaoAuthenticationProvider(userDetailsService());
+  AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService) {
+    var provider = new DaoAuthenticationProvider(userDetailsService);
     provider.setPasswordEncoder(passwordEncoder());
     return provider;
   }
 
   @Bean 
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+  AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
     return config.getAuthenticationManager();
   }
 
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationProvider authenticationProvider) throws Exception {
     http
     .csrf(csrf -> csrf.disable())
     .cors(Customizer.withDefaults())
@@ -72,12 +73,13 @@ public class SecurityConfig {
         .anyRequest().authenticated()
         )
         .headers(h -> h.frameOptions(frame -> frame.sameOrigin()))
-        .authenticationProvider(authenticationProvider())
+        .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
     return http.build();
   }
 
+  @Bean
   public CorsConfigurationSource corsConfigurationSource() {
     var config = new CorsConfiguration();
     config.setAllowedOrigins(List.of("http://localhost:3000"));
