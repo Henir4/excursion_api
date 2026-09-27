@@ -12,7 +12,7 @@ import com.viagens.rotaunica.dto.RegisterRequest;
 import com.viagens.rotaunica.model.User;
 import com.viagens.rotaunica.model.UserRole;
 import com.viagens.rotaunica.repositories.UserRepository;
-import com.viagens.security.JwtService;
+import com.viagens.rotaunica.security.JwtService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

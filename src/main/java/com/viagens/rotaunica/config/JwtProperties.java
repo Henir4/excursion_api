@@ -1,4 +1,4 @@
-package com.viagens.config;
+package com.viagens.rotaunica.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

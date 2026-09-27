@@ -1,3 +1,4 @@
+package com.viagens.rotaunica.config;
 /**package com.viagens.config;
 
 import org.springframework.boot.CommandLineRunner;

@@ -1,4 +1,4 @@
-package com.viagens.controllers;
+package com.viagens.rotaunica.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

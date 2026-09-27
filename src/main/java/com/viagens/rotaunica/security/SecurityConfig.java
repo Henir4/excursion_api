@@ -1,4 +1,4 @@
-package com.viagens.security;
+package com.viagens.rotaunica.security;
 
 import java.util.List;
 
